@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='utf-8'>
+<style>
+body {font-family: "linux biolinum"; background-color: #666; justify-content: center;  align-items: center;}
+.tarjeta{ width:7cm; height:7cm; margin:0.5cm; float:left; border: 0px red solid;}
+.tarjeta > .anverso{
+	position: absolute;
+	margin: 0.5cm;
+	transform: perspective( 600px ) rotateY( 0deg );
+	background:#FC0; width: 6cm; height: 6cm; border-radius: 7px;
+	backface-visibility: hidden;
+	transition: transform .7s ease-in;
+	font-size: 250%;
+	text-align: center;
+	vertical-align: middle;
+}
+.tarjeta > .reverso{
+	position: absolute;
+	margin: 0.5cm;
+	transform: perspective( 600px ) rotateY( 180deg );
+	background: #fff; width: 6cm; height: 6cm; border-radius: 7px;
+	backface-visibility: hidden;
+	transition: transform .7s ease-in;
+	font-size: 180%;
+	text-align: center;
+	vertical-align: middle;
+}
+.tarjeta:hover > .anverso{
+	transform: perspective( 600px ) rotateY( -180deg );
+}
+.tarjeta:hover > .reverso{
+	transform: perspective( 600px ) rotateY( 0deg );
+}
+</style>
+</head>
+
+<script type="text/javascript">
+function deletrear (num) {
+	var a = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once ', 'doce ', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve', 'veinte', 'veintiuno', 'veintidós', 'veintitrés', 'veinticuatro', 'veinticinco', 'veintiséis', 'veintisiete', 'veintiocho', 'veintinueve'];
+	var b = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+	var c = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+	var d = ['', 'mil'];
+
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    if (n[3] != 0) {
+    	if (d[Number(n[3])]) {
+    		str += d[Number(n[3])] + ' '
+    	} else {
+    		str += (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + ' mil '
+    	}
+    }
+    if (n[4] != 0) {
+    	if (n[5] == 0) {
+    		str += ' cien '
+    	} else {
+    		str += (c[n[4][0]]) + ' '
+    	}
+  	}
+    if (n[5] != 0) {
+    	if (a[Number(n[5])]) {
+			str += a[Number(n[5])]
+    	} else {
+			str += b[n[5][0]]
+			if (a[n[5][1]]) {
+				str += ' y ' + a[n[5][1]]
+			}
+    	}
+    }
+    return str;
+}
+
+function randomizar_sopesadamente() {
+	max_digitos = 4
+	min_digitos = 2
+	cuantos_digitos = Math.floor(Math.random() * max_digitos) + 1
+	max_numero = parseInt("9".repeat(cuantos_digitos))
+	min_numero = parseInt("1".repeat(min_digitos - 1)) * 10
+	return Math.floor(Math.random() * Math.floor(max_numero) + min_numero);
+}
+
+function myFunction() {
+
+	numprimero = randomizar_sopesadamente()
+    document.getElementById("primeroNUM").innerHTML = "<h1>" + numprimero + "</h1>";
+    document.getElementById("primeroLET").innerHTML = "<p>"  + numprimero + "<br>" + deletrear(numprimero) + "</p>";
+
+	numsegundo = randomizar_sopesadamente()
+    document.getElementById("segundoNUM").innerHTML = "<h1>" + numsegundo + "</h1>";
+    document.getElementById("segundoLET").innerHTML = "<p>"  + numsegundo + "<br>" + deletrear(numsegundo) + "</p>";
+
+	numtercero = randomizar_sopesadamente()
+    document.getElementById("terceroNUM").innerHTML = "<h1>" + numtercero + "</h1>";
+    document.getElementById("terceroLET").innerHTML = "<p>"  + numtercero + "<br>" + deletrear(numtercero) + "</p>";
+
+	numcuarto = randomizar_sopesadamente()
+    document.getElementById("cuartoNUM").innerHTML = "<h1>" + numcuarto + "</h1>";
+    document.getElementById("cuartoLET").innerHTML = "<p>"  + numcuarto + "<br>" + deletrear(numcuarto) + "</p>";
+
+	numquinto = randomizar_sopesadamente()
+    document.getElementById("quintoNUM").innerHTML = "<h1>" + numquinto + "</h1>";
+    document.getElementById("quintoLET").innerHTML = "<p>"  + numquinto + "<br>" + deletrear(numquinto) + "</p>";
+
+	numsexto = randomizar_sopesadamente()
+    document.getElementById("sextoNUM").innerHTML = "<h1>" + numsexto + "</h1>";
+    document.getElementById("sextoLET").innerHTML = "<p>"  + numsexto + "<br>" + deletrear(numsexto) + "</p>";
+
+	numseptimo = randomizar_sopesadamente()
+    document.getElementById("septimoNUM").innerHTML = "<h1>" + numseptimo + "</h1>";
+    document.getElementById("septimoLET").innerHTML = "<p>"  + numseptimo + "<br>" + deletrear(numseptimo) + "</p>";
+
+	numoctavo = randomizar_sopesadamente()
+    document.getElementById("octavoNUM").innerHTML = "<h1>" + numoctavo + "</h1>";
+    document.getElementById("octavoLET").innerHTML = "<p>"  + numoctavo + "<br>" + deletrear(numoctavo) + "</p>";
+
+	numnoveno = randomizar_sopesadamente()
+    document.getElementById("novenoNUM").innerHTML = "<h1>" + numnoveno + "</h1>";
+    document.getElementById("novenoLET").innerHTML = "<p>"  + numnoveno + "<br>" + deletrear(numnoveno) + "</p>";
+
+	numdecimo = randomizar_sopesadamente()
+    document.getElementById("decimoNUM").innerHTML = "<h1>" + numdecimo + "</h1>";
+    document.getElementById("decimoLET").innerHTML = "<p>"  + numdecimo + "<br>" + deletrear(numdecimo) + "</p>";
+
+	numundecimo = randomizar_sopesadamente()
+    document.getElementById("undecimoNUM").innerHTML = "<h1>" + numundecimo + "</h1>";
+    document.getElementById("undecimoLET").innerHTML = "<p>"  + numundecimo + "<br>" + deletrear(numundecimo) + "</p>";
+
+	numduodecimo = randomizar_sopesadamente()
+    document.getElementById("duodecimoNUM").innerHTML = "<h1>" + numduodecimo + "</h1>";
+    document.getElementById("duodecimoLET").innerHTML = "<p>"  + numduodecimo + "<br>" + deletrear(numduodecimo) + "</p>";
+
+	numdecimotercero = randomizar_sopesadamente()
+    document.getElementById("decimoterceroNUM").innerHTML = "<h1>" + numdecimotercero + "</h1>";
+    document.getElementById("decimoterceroLET").innerHTML = "<p>"  + numdecimotercero + "<br>" + deletrear(numdecimotercero) + "</p>";
+
+	numdecimocuarto = randomizar_sopesadamente()
+    document.getElementById("decimocuartoNUM").innerHTML = "<h1>" + numdecimocuarto + "</h1>";
+    document.getElementById("decimocuartoLET").innerHTML = "<p>"  + numdecimocuarto + "<br>" + deletrear(numdecimocuarto) + "</p>";
+
+	numdecimoquinto = randomizar_sopesadamente()
+    document.getElementById("decimoquintoNUM").innerHTML = "<h1>" + numdecimoquinto + "</h1>";
+    document.getElementById("decimoquintoLET").innerHTML = "<p>"  + numdecimoquinto + "<br>" + deletrear(numdecimoquinto) + "</p>";
+
+	numdecimosexto = randomizar_sopesadamente()
+    document.getElementById("decimosextoNUM").innerHTML = "<h1>" + numdecimosexto + "</h1>";
+    document.getElementById("decimosextoLET").innerHTML = "<p>"  + numdecimosexto + "<br>" + deletrear(numdecimosexto) + "</p>";
+
+	numdecimoseptimo = randomizar_sopesadamente()
+    document.getElementById("decimoseptimoNUM").innerHTML = "<h1>" + numdecimoseptimo + "</h1>";
+    document.getElementById("decimoseptimoLET").innerHTML = "<p>"  + numdecimoseptimo + "<br>" + deletrear(numdecimoseptimo) + "</p>";
+
+	numdecimooctavo = randomizar_sopesadamente()
+    document.getElementById("decimooctavoNUM").innerHTML = "<h1>" + numdecimooctavo + "</h1>";
+    document.getElementById("decimooctavoLET").innerHTML = "<p>"  + numdecimooctavo + "<br>" + deletrear(numdecimooctavo) + "</p>";
+
+}
+</script>
+
+<body onload="myFunction()">
+<!-- <center><button onclick="myFunction()">Cambiar números</button></center> -->
+
+<div class="tarjeta">
+  <div id="primeroNUM" class="anverso"><h1>300</h1></div>
+  <div id="primeroLET" class="reverso"><p>300<br>trescientos</p></div>
+</div>
+<div class="tarjeta">
+  <div id="segundoNUM" class="anverso"><h1>142</h1></div>
+  <div id="segundoLET" class="reverso"><p>142<br>ciento cuarenta y dos</p></div>
+</div>
+<div class="tarjeta">
+  <div id="terceroNUM" class="anverso"><h1>500</h1></div>
+  <div id="terceroLET" class="reverso"><p>500<br>quinientos</p></div>
+</div>
+<div class="tarjeta">
+  <div id="cuartoNUM" class="anverso"><h1>23</h1></div>
+  <div id="cuartoLET" class="reverso"><p>23<br>veintitrés</p></div>
+</div>
+<div class="tarjeta">
+  <div id="quintoNUM" class="anverso"><h1>1015</h1></div>
+  <div id="quintoLET" class="reverso"><p>1015<br>mil quince</p></div>
+</div>
+<div class="tarjeta">
+  <div id="sextoNUM" class="anverso"><h1>204</h1></div>
+  <div id="sextoLET" class="reverso"><p>204<br>doscientos cuatro</p></div>
+</p></div>
+
+<div class="tarjeta">
+  <div id="septimoNUM" class="anverso"><h1>110</h1></div>
+  <div id="septimoLET" class="reverso"><p>110<br>ciento diez</p></div>
+</div>
+<div class="tarjeta">
+  <div id="octavoNUM" class="anverso"><h1>2000</h1></div>
+  <div id="octavoLET" class="reverso"><p>2000<br>dos mil</p></div>
+</div>
+<div class="tarjeta">
+  <div id="novenoNUM" class="anverso"><h1>67</h1></div>
+  <div id="novenoLET" class="reverso"><p>67<br>sesenta y siete</p></div>
+</div>
+<div class="tarjeta">
+  <div id="decimoNUM" class="anverso"><h1>74</h1></div>
+  <div id="decimoLET" class="reverso"><p>74<br>setenta y cuatro</p></div>
+</div>
+<div class="tarjeta">
+  <div id="undecimoNUM" class="anverso"><h1>1433</h1></div>
+  <div id="undecimoLET" class="reverso"><p>1433<br>mil cuatrocientos treinta y tres</p></div>
+</div>
+<div class="tarjeta">
+  <div id="duodecimoNUM" class="anverso"><h1>19</h1></div>
+  <div id="duodecimoLET" class="reverso"><p>19<br>diecinueve</p></div>
+</div>
+<div class="tarjeta">
+  <div id="decimoterceroNUM" class="anverso"><h1>1023</h1></div>
+  <div id="decimoterceroLET" class="reverso"><p>1023<br>mil veintitrés</p></div>
+</div>
+<div class="tarjeta">
+  <div id="decimocuartoNUM" class="anverso"><h1>22</h1></div>
+  <div id="decimocuartoLET" class="reverso"><p>22<br>veintidós</p></div>
+</div>
+<div class="tarjeta">
+  <div id="decimoquintoNUM" class="anverso"><h1>6</h1></div>
+  <div id="decimoquintoLET" class="reverso"><p>6<br>seis</p></div>
+</div>
+<div class="tarjeta">
+  <div id="decimosextoNUM" class="anverso"><h1>320</h1></div>
+  <div id="decimosextoLET" class="reverso"><p>320<br>trescientos veinte</p></div>
+</div>
+<div class="tarjeta">
+  <div id="decimoseptimoNUM" class="anverso"><h1>4200</h1></div>
+  <div id="decimoseptimoLET" class="reverso"><p>4200<br>cuatro mil doscientos</p></div>
+</div>
+<div class="tarjeta">
+  <div id="decimooctavoNUM" class="anverso"><h1>880</h1></div>
+  <div id="decimooctavoLET" class="reverso"><p>880<br>ochocientos ochenta</p></div>
+</div>
+</body>
+</html>
