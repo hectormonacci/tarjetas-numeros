@@ -38,23 +38,39 @@ body {font-family: "linux biolinum"; background-color: #666; justify-content: ce
 
 <script type="text/javascript">
 function deletrear (num) {
-	var a = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once ', 'doce ', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve', 'veinte', 'veintiuno', 'veintidós', 'veintitrés', 'veinticuatro', 'veinticinco', 'veintiséis', 'veintisiete', 'veintiocho', 'veintinueve'];
-	var b = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+	var a = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve', 'veinte', 'veintiuno', 'veintidós', 'veintitrés', 'veinticuatro', 'veinticinco', 'veintiséis', 'veintisiete', 'veintiocho', 'veintinueve'];
+	var b = ['', '', '', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
 	var c = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
-	var d = ['', 'mil'];
 
     if ((num = num.toString()).length > 9) return 'overflow';
     n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
     if (!n) return; var str = '';
-    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
-    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
-    if (n[3] != 0) {
-    	if (d[Number(n[3])]) {
-    		str += d[Number(n[3])] + ' '
-    	} else {
-    		str += (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + ' mil '
+    // str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    // str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+
+    if (n[3] != 0) {					/* Si los miles no son cero */
+    	if (n[3] != 1) {				/* Si los miles no son uno  */
+    		if (n[3][1] == 1) {			/* Si las unidades de mil son uno */
+    			unidad = ' un '
+    		} else {
+    			unidad = a[n[3][1]]
+    		}
+    		if (a[Number(n[3])]) {
+    			if (n[3] == 21) {
+    				str += ' veintiún '
+    			} else {
+    				str += a[Number(n[3])]
+    			}
+    		} else {
+    			str += b[n[3][0]]
+	    		if (n[3][1] != 0) {			/* Si las unidades de mil no son cero */
+	    			str += ' y ' + unidad
+    			}
+    		}
     	}
+    	str +=  ' mil '
     }
+
     if (n[4] != 0) {
     	if (n[5] == 0 && n[4] == 1) {
     		str += ' cien '
@@ -81,82 +97,81 @@ function randomizar_sopesadamente() {
 	cuantos_digitos = Math.floor(Math.random() * max_digitos) + 1
 	max_numero = parseInt("9".repeat(cuantos_digitos))
 	min_numero = parseInt("1".repeat(min_digitos - 1)) * 10
-	return Math.floor(Math.random() * Math.floor(max_numero) + min_numero);
+	return min_numero + Math.floor((Math.random() * max_numero));
 }
 
 function myFunction() {
-
 	numprimero = randomizar_sopesadamente()
     document.getElementById("primeroNUM").innerHTML = "<h1>" + numprimero + "</h1>";
-    document.getElementById("primeroLET").innerHTML = "<p>"  + numprimero + "<br>" + deletrear(numprimero) + "</p>";
+    document.getElementById("primeroLET").innerHTML = "<p><strong>" + numprimero + "</strong><br>" + deletrear(numprimero) + "</p>";
 
 	numsegundo = randomizar_sopesadamente()
     document.getElementById("segundoNUM").innerHTML = "<h1>" + numsegundo + "</h1>";
-    document.getElementById("segundoLET").innerHTML = "<p>"  + numsegundo + "<br>" + deletrear(numsegundo) + "</p>";
+    document.getElementById("segundoLET").innerHTML = "<p><strong>" + numsegundo + "</strong><br>" + deletrear(numsegundo) + "</p>";
 
 	numtercero = randomizar_sopesadamente()
     document.getElementById("terceroNUM").innerHTML = "<h1>" + numtercero + "</h1>";
-    document.getElementById("terceroLET").innerHTML = "<p>"  + numtercero + "<br>" + deletrear(numtercero) + "</p>";
+    document.getElementById("terceroLET").innerHTML = "<p><strong>" + numtercero + "</strong><br>" + deletrear(numtercero) + "</p>";
 
 	numcuarto = randomizar_sopesadamente()
     document.getElementById("cuartoNUM").innerHTML = "<h1>" + numcuarto + "</h1>";
-    document.getElementById("cuartoLET").innerHTML = "<p>"  + numcuarto + "<br>" + deletrear(numcuarto) + "</p>";
+    document.getElementById("cuartoLET").innerHTML = "<p><strong>" + numcuarto + "</strong><br>" + deletrear(numcuarto) + "</p>";
 
 	numquinto = randomizar_sopesadamente()
     document.getElementById("quintoNUM").innerHTML = "<h1>" + numquinto + "</h1>";
-    document.getElementById("quintoLET").innerHTML = "<p>"  + numquinto + "<br>" + deletrear(numquinto) + "</p>";
+    document.getElementById("quintoLET").innerHTML = "<p><strong>" + numquinto + "</strong><br>" + deletrear(numquinto) + "</p>";
 
 	numsexto = randomizar_sopesadamente()
     document.getElementById("sextoNUM").innerHTML = "<h1>" + numsexto + "</h1>";
-    document.getElementById("sextoLET").innerHTML = "<p>"  + numsexto + "<br>" + deletrear(numsexto) + "</p>";
+    document.getElementById("sextoLET").innerHTML = "<p><strong>" + numsexto + "</strong><br>" + deletrear(numsexto) + "</p>";
 
 	numseptimo = randomizar_sopesadamente()
     document.getElementById("septimoNUM").innerHTML = "<h1>" + numseptimo + "</h1>";
-    document.getElementById("septimoLET").innerHTML = "<p>"  + numseptimo + "<br>" + deletrear(numseptimo) + "</p>";
+    document.getElementById("septimoLET").innerHTML = "<p><strong>" + numseptimo + "</strong><br>" + deletrear(numseptimo) + "</p>";
 
 	numoctavo = randomizar_sopesadamente()
     document.getElementById("octavoNUM").innerHTML = "<h1>" + numoctavo + "</h1>";
-    document.getElementById("octavoLET").innerHTML = "<p>"  + numoctavo + "<br>" + deletrear(numoctavo) + "</p>";
+    document.getElementById("octavoLET").innerHTML = "<p><strong>" + numoctavo + "</strong><br>" + deletrear(numoctavo) + "</p>";
 
 	numnoveno = randomizar_sopesadamente()
     document.getElementById("novenoNUM").innerHTML = "<h1>" + numnoveno + "</h1>";
-    document.getElementById("novenoLET").innerHTML = "<p>"  + numnoveno + "<br>" + deletrear(numnoveno) + "</p>";
+    document.getElementById("novenoLET").innerHTML = "<p><strong>" + numnoveno + "</strong><br>" + deletrear(numnoveno) + "</p>";
 
 	numdecimo = randomizar_sopesadamente()
     document.getElementById("decimoNUM").innerHTML = "<h1>" + numdecimo + "</h1>";
-    document.getElementById("decimoLET").innerHTML = "<p>"  + numdecimo + "<br>" + deletrear(numdecimo) + "</p>";
+    document.getElementById("decimoLET").innerHTML = "<p><strong>" + numdecimo + "</strong><br>" + deletrear(numdecimo) + "</p>";
 
 	numundecimo = randomizar_sopesadamente()
     document.getElementById("undecimoNUM").innerHTML = "<h1>" + numundecimo + "</h1>";
-    document.getElementById("undecimoLET").innerHTML = "<p>"  + numundecimo + "<br>" + deletrear(numundecimo) + "</p>";
+    document.getElementById("undecimoLET").innerHTML = "<p><strong>" + numundecimo + "</strong><br>" + deletrear(numundecimo) + "</p>";
 
 	numduodecimo = randomizar_sopesadamente()
     document.getElementById("duodecimoNUM").innerHTML = "<h1>" + numduodecimo + "</h1>";
-    document.getElementById("duodecimoLET").innerHTML = "<p>"  + numduodecimo + "<br>" + deletrear(numduodecimo) + "</p>";
+    document.getElementById("duodecimoLET").innerHTML = "<p><strong>" + numduodecimo + "</strong><br>" + deletrear(numduodecimo) + "</p>";
 
 	numdecimotercero = randomizar_sopesadamente()
     document.getElementById("decimoterceroNUM").innerHTML = "<h1>" + numdecimotercero + "</h1>";
-    document.getElementById("decimoterceroLET").innerHTML = "<p>"  + numdecimotercero + "<br>" + deletrear(numdecimotercero) + "</p>";
+    document.getElementById("decimoterceroLET").innerHTML = "<p><strong>" + numdecimotercero + "</strong><br>" + deletrear(numdecimotercero) + "</p>";
 
 	numdecimocuarto = randomizar_sopesadamente()
     document.getElementById("decimocuartoNUM").innerHTML = "<h1>" + numdecimocuarto + "</h1>";
-    document.getElementById("decimocuartoLET").innerHTML = "<p>"  + numdecimocuarto + "<br>" + deletrear(numdecimocuarto) + "</p>";
+    document.getElementById("decimocuartoLET").innerHTML = "<p><strong>" + numdecimocuarto + "</strong><br>" + deletrear(numdecimocuarto) + "</p>";
 
 	numdecimoquinto = randomizar_sopesadamente()
     document.getElementById("decimoquintoNUM").innerHTML = "<h1>" + numdecimoquinto + "</h1>";
-    document.getElementById("decimoquintoLET").innerHTML = "<p>"  + numdecimoquinto + "<br>" + deletrear(numdecimoquinto) + "</p>";
+    document.getElementById("decimoquintoLET").innerHTML = "<p><strong>" + numdecimoquinto + "</strong><br>" + deletrear(numdecimoquinto) + "</p>";
 
 	numdecimosexto = randomizar_sopesadamente()
     document.getElementById("decimosextoNUM").innerHTML = "<h1>" + numdecimosexto + "</h1>";
-    document.getElementById("decimosextoLET").innerHTML = "<p>"  + numdecimosexto + "<br>" + deletrear(numdecimosexto) + "</p>";
+    document.getElementById("decimosextoLET").innerHTML = "<p><strong>" + numdecimosexto + "</strong><br>" + deletrear(numdecimosexto) + "</p>";
 
 	numdecimoseptimo = randomizar_sopesadamente()
     document.getElementById("decimoseptimoNUM").innerHTML = "<h1>" + numdecimoseptimo + "</h1>";
-    document.getElementById("decimoseptimoLET").innerHTML = "<p>"  + numdecimoseptimo + "<br>" + deletrear(numdecimoseptimo) + "</p>";
+    document.getElementById("decimoseptimoLET").innerHTML = "<p><strong>" + numdecimoseptimo + "</strong><br>" + deletrear(numdecimoseptimo) + "</p>";
 
 	numdecimooctavo = randomizar_sopesadamente()
     document.getElementById("decimooctavoNUM").innerHTML = "<h1>" + numdecimooctavo + "</h1>";
-    document.getElementById("decimooctavoLET").innerHTML = "<p>"  + numdecimooctavo + "<br>" + deletrear(numdecimooctavo) + "</p>";
+    document.getElementById("decimooctavoLET").innerHTML = "<p><strong>" + numdecimooctavo + "</strong><br>" + deletrear(numdecimooctavo) + "</p>";
 
 }
 </script>
