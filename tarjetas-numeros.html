@@ -34,7 +34,6 @@ body {font-family: "linux biolinum"; background-color: #666; justify-content: ce
 	transform: perspective( 600px ) rotateY( 0deg );
 }
 </style>
-</head>
 
 <script type="text/javascript">
 function deletrear (num) {
@@ -96,7 +95,7 @@ function randomizar_sopesadamente() {
 	min_digitos = 2
 	cuantos_digitos = Math.floor(Math.random() * max_digitos) + 1
 	max_numero = parseInt("9".repeat(cuantos_digitos))
-	min_numero = parseInt("1".repeat(min_digitos - 1)) * 10
+	min_numero = parseInt("1" + "0".repeat(min_digitos - 1))
 	return min_numero + Math.floor((Math.random() * max_numero));
 }
 
@@ -175,6 +174,7 @@ function myFunction() {
 
 }
 </script>
+</head>
 
 <body onload="myFunction()">
 <!-- <center><button onclick="myFunction()">Cambiar números</button></center> -->
